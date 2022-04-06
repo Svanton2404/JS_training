@@ -1,23 +1,20 @@
 'use strict'
 
-let arr = [];
+let num;
+
 getSimpleNum(1, 100);
 
-function getSimpleNum(start, end){
-    for (let i = 0; i <= (end - start); i++) {
-        arr[i] = i + 1;
-    }
-    
-    arr.forEach(function(elem){
-        let deviderCounter = 0;
-        for (let j = 1; j < elem; j++){
-            if (elem%j == 0) {
-                deviderCounter = deviderCounter + 1;
-            }
-            if (deviderCounter == 2) {
-                  console.log('Делители этого числа: ' + '1' + ' и ' + elem);  
+function getSimpleNum(start, end) {
+    for (let i = start; i <= end; i++) {
+        let dividerCounter = 0;
+        for (let j = 1; j <= i; j++) {
+            if (i % j == 0) {
+                dividerCounter = dividerCounter + 1;
             }
         }
-        
-    }) 
+        if (dividerCounter == 2) {
+            num = i;
+            console.log('Натуральное число: ' + num + ' и делители этого числа: ' + '1' + ' и ' + num);
+        }
+    }
 };
