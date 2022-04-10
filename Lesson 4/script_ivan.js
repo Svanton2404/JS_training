@@ -7,17 +7,24 @@ let firstNum,
 
 // Проверка, что данные введены верно: только числа, start > end, не отрицательные, не дробные числа) //
 
+function getNumber(a) {
+    return parseInt(a);
+}
+
 do {
-    firstNum = prompt('Введите первое число в диапазоне', '');
-    firstNum = parseInt(firstNum);
+    firstNum = getNumber(prompt('Введите первое число в диапазоне', ''));
 } while (isNaN(firstNum) || Math.abs(secondNum) < Math.abs(firstNum) || firstNum < 0 || firstNum == '');
 
 do {
-    secondNum = prompt('Введите последнее число в диапазоне', '');
-    secondNum = parseInt(secondNum);
+    secondNum = getNumber(prompt('Введите последнее число в диапазоне', ''));
 } while (isNaN(secondNum) || Math.abs(secondNum) < Math.abs(firstNum) || secondNum < 0 || secondNum == '');
 
+
 getFriendlyNumbers(firstNum, secondNum);
+
+for (let key of finalArr) {
+    console.log('Дружественные числа: ' + '[' + key + ']');
+}
 
 function getFriendlyNumbers(start, end) {
     // Перебор всех чисел в заданном диапазоне //
@@ -32,14 +39,14 @@ function getFriendlyNumbers(start, end) {
     }
 
     arr.forEach(function (elem) {
-        // Определение суммы делителей первого чилса = второму числу // 
+        // Определение суммы делителей первого чилса = второму числу //
         let sum1 = 0;
         for (let j = 1; j < elem; j++) {
             if (elem % j == 0) {
                 sum1 = sum1 + j;
             }
         }
-        // Определение суммы делителей второго чилса // 
+        // Определение суммы делителей второго чилса //
         let sum2 = 0;
         for (let i = 1; i < sum1; i++) {
             if (sum1 % i == 0) {
@@ -52,13 +59,13 @@ function getFriendlyNumbers(start, end) {
 
             finalArr.push(newArr);
         }
+
     });
+
     if (finalArr.length == 0) {
         console.log('В данном диапазоне нет дружественных чисел')
     } else {
         return finalArr;
     }
 };
-for (let key of finalArr) {
-    console.log('Дружественные числа: ' + '[' + key + ']');
-};
+
