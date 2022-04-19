@@ -50,12 +50,12 @@ startBtn.addEventListener('click', function () {
     dayValue.value = new Date(Date.parse(time)).getDate();
 });
 
+expensesBtn.disabled = true;
+console.log(expensesBtn);
 
 
-expensesBtn.addEventListener('click', function () {
+expensesBtn[0].addEventListener('click', function () {
     let sum = 0;
-    expensesBtn.disabled = true;
-
     if (expensesItem != null) {
         expensesBtn.disabled = false;
     } else {
@@ -72,6 +72,7 @@ expensesBtn.addEventListener('click', function () {
             console.log("done");
             appData.expenses[a] = b;
             sum += +b;
+            appData.expensesSum = sum;
         } else {
             // alert("Ошибка ввода данных! Введите заново");
             i--;
@@ -80,7 +81,7 @@ expensesBtn.addEventListener('click', function () {
     expensesValue.textContent = sum;
 });
 
-optionalExpensesBtn.addEventListener('click', function () {
+optionalExpensesBtn[0].addEventListener('click', function () {
     for (let j = 0; j < optExpensesItem.length; j++) {
         let c = optExpensesItem[j].value;
         appData.optionalExpenses[j] = c;
@@ -88,10 +89,10 @@ optionalExpensesBtn.addEventListener('click', function () {
     }
 });
 
-calcBtn.addEventListener('click', function () {
+calcBtn[0].addEventListener('click', function () {
 
     if (appData.budget != undefined) {
-        appData.moneyPerDay = (appData.budget / 30).toFixed();
+        appData.moneyPerDay = ((appData.budget - appData.expensesSum) / 30).toFixed();
         dayBudgetValue.textContent = appData.moneyPerDay;
 
         if (appData.moneyPerDay < 100) {
@@ -169,3 +170,6 @@ let appData = {
     income: [],
     savings: false,
 };
+
+// p0106
+// p0138
