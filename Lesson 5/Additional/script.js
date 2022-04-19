@@ -14,7 +14,7 @@ menu.appendChild(li);
 li.innerHTML = 'Пятый пункт';
 
 // 2. Заменить картинку заднего фона на другую из папки img
-
+document.body.style.backgroundImage = 'url(img/apple_true.jpg)';
 
 // 3. Поменять заголовок, добавить слово "подлинную"
 
