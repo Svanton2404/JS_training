@@ -14,9 +14,9 @@ let startBtn = document.getElementById('start'),
     optExpensesItem = document.querySelectorAll('.optionalexpenses-item'),
 
     // btn = document.getElementsByTagName('button'),
-    expensesBtn = document.querySelectorAll('.expenses-item-btn'),
-    optionalExpensesBtn = document.querySelectorAll('.optionalexpenses-btn'),
-    calcBtn = document.querySelectorAll('.count-budget-btn'),
+    expensesBtn = document.querySelectorAll('.expenses-item-btn')[0],
+    optionalExpensesBtn = document.querySelectorAll('.optionalexpenses-btn')[0],
+    calcBtn = document.querySelectorAll('.count-budget-btn')[0],
 
     chooseIncome = document.querySelector('.choose-income'),
     precentValue = document.querySelector('.choose-percent'),
@@ -32,6 +32,10 @@ let startBtn = document.getElementById('start'),
 //     optionalExpensesValue, incomeValue, monthSavingsValue, yearSavingsValue,
 //     chooseIncome, savings, choosePrecent, yearValue, monthValue, dayValue);
 // console.log(expensesItem, btn, btnAcceptBase, btnAcceptOpt, btnCalc);
+
+expensesBtn.disabled = true;
+optionalExpensesBtn.disabled = true;
+calcBtn.disabled = true;
 
 let money, time;
 
@@ -50,19 +54,20 @@ startBtn.addEventListener('click', function () {
     dayValue.value = new Date(Date.parse(time)).getDate();
 });
 
-expensesBtn.disabled = true;
-console.log(expensesBtn);
+expensesItem[1].addEventListener('input', function(){
+    expensesBtn.disabled = false;
+    calcBtn.disabled = false;
+});
+
+optExpensesItem[1].addEventListener('input', function(){
+    optionalExpensesBtn.disabled = false;
+    calcBtn.disabled = false;
+});
 
 
-expensesBtn[0].addEventListener('click', function () {
+expensesBtn.addEventListener('click', function () {
     let sum = 0;
-    if (expensesItem != null) {
-        expensesBtn.disabled = false;
-    } else {
-        expensesBtn.disabled = true;
-    }
-    console.log(expensesBtn);
-
+    
     for (let i = 0; i < expensesItem.length; i++) {
         let a = expensesItem[i].value,
             b = expensesItem[++i].value;
@@ -81,7 +86,7 @@ expensesBtn[0].addEventListener('click', function () {
     expensesValue.textContent = sum;
 });
 
-optionalExpensesBtn[0].addEventListener('click', function () {
+optionalExpensesBtn.addEventListener('click', function () {
     for (let j = 0; j < optExpensesItem.length; j++) {
         let c = optExpensesItem[j].value;
         appData.optionalExpenses[j] = c;
@@ -89,7 +94,7 @@ optionalExpensesBtn[0].addEventListener('click', function () {
     }
 });
 
-calcBtn[0].addEventListener('click', function () {
+calcBtn.addEventListener('click', function () {
 
     if (appData.budget != undefined) {
         appData.moneyPerDay = ((appData.budget - appData.expensesSum) / 30).toFixed();
