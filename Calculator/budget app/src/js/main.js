@@ -13,7 +13,6 @@ let startBtn = document.getElementById('start'),
     expensesItem = document.querySelectorAll('.expenses-item'),
     optExpensesItem = document.querySelectorAll('.optionalexpenses-item'),
 
-    // btn = document.getElementsByTagName('button'),
     expensesBtn = document.querySelectorAll('.expenses-item-btn')[0],
     optionalExpensesBtn = document.querySelectorAll('.optionalexpenses-btn')[0],
     calcBtn = document.querySelectorAll('.count-budget-btn')[0],
@@ -28,14 +27,10 @@ let startBtn = document.getElementById('start'),
     monthValue = document.querySelector('.month-value'),
     dayValue = document.querySelector('.day-value');
 
-// console.log(budgetValue, dayBudgetValue, levelValue, expensesValue,
-//     optionalExpensesValue, incomeValue, monthSavingsValue, yearSavingsValue,
-//     chooseIncome, savings, choosePrecent, yearValue, monthValue, dayValue);
-// console.log(expensesItem, btn, btnAcceptBase, btnAcceptOpt, btnCalc);
-
-expensesBtn.disabled = true;
-optionalExpensesBtn.disabled = true;
-calcBtn.disabled = true;
+                // Делаем неактивными кнопки изначально //
+    expensesBtn.disabled = true;
+    optionalExpensesBtn.disabled = true;
+    calcBtn.disabled = true;
 
 let money, time;
 
@@ -54,20 +49,32 @@ startBtn.addEventListener('click', function () {
     dayValue.value = new Date(Date.parse(time)).getDate();
 });
 
-expensesItem[1].addEventListener('input', function(){
+expensesItem[1].addEventListener('input', function () {
     expensesBtn.disabled = false;
     calcBtn.disabled = false;
 });
 
-optExpensesItem[1].addEventListener('input', function(){
+optExpensesItem[1].addEventListener('input', function () {
     optionalExpensesBtn.disabled = false;
     calcBtn.disabled = false;
 });
 
+for(let k = 0; k < optExpensesItem.length; k++){
+    optExpensesItem[k].addEventListener('keypress', function () {
+        let that = this;
+    
+        setTimeout(function () {
+            var res = /[^а-я ]/g.exec(that.value);
+            console.log(res);
+            that.value = that.value.replace(res, '');
+        }, 0);
+    });
+}
+
 
 expensesBtn.addEventListener('click', function () {
     let sum = 0;
-    
+
     for (let i = 0; i < expensesItem.length; i++) {
         let a = expensesItem[i].value,
             b = expensesItem[++i].value;
