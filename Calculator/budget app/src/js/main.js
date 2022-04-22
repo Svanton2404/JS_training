@@ -27,10 +27,10 @@ let startBtn = document.getElementById('start'),
     monthValue = document.querySelector('.month-value'),
     dayValue = document.querySelector('.day-value');
 
-                // Делаем неактивными кнопки изначально //
-    expensesBtn.disabled = true;
-    optionalExpensesBtn.disabled = true;
-    calcBtn.disabled = true;
+// Делаем неактивными кнопки изначально //
+expensesBtn.disabled = true;
+optionalExpensesBtn.disabled = true;
+calcBtn.disabled = true;
 
 let money, time;
 
@@ -49,9 +49,27 @@ startBtn.addEventListener('click', function () {
     dayValue.value = new Date(Date.parse(time)).getDate();
 });
 
-expensesItem[1].addEventListener('input', function () {
-    expensesBtn.disabled = false;
-    calcBtn.disabled = false;
+// for(let i = 0; i < expensesItem.length; i++){
+//     expensesItem[i].addEventListener('input', function () {
+//         expensesBtn.disabled = false;
+//         calcBtn.disabled = false;
+//     });
+// }
+
+expensesItem.forEach(function (val, key) {
+    val.addEventListener('input', function () {
+        let isUndefined = true;
+        for (let i = 0; i < expensesItem.length; i++) {
+            if (expensesItem[i].value == '') {
+                isUndefined = false;
+                break;
+            }
+        }
+        if (isUndefined) {
+            expensesBtn.disabled = false;
+            calcBtn.disabled = false;
+        }
+    });
 });
 
 optExpensesItem[1].addEventListener('input', function () {
@@ -59,17 +77,17 @@ optExpensesItem[1].addEventListener('input', function () {
     calcBtn.disabled = false;
 });
 
-for(let k = 0; k < optExpensesItem.length; k++){
-    optExpensesItem[k].addEventListener('keypress', function () {
+for (let i = 0; i < optExpensesItem.length; i++) {
+    optExpensesItem[i].addEventListener('keypress', function () {
         let that = this;
-    
+
         setTimeout(function () {
             var res = /[^а-я ]/g.exec(that.value);
             console.log(res);
             that.value = that.value.replace(res, '');
         }, 0);
     });
-}
+};
 
 
 expensesBtn.addEventListener('click', function () {
@@ -94,6 +112,7 @@ expensesBtn.addEventListener('click', function () {
 });
 
 optionalExpensesBtn.addEventListener('click', function () {
+    optionalExpensesValue.textContent = '';
     for (let j = 0; j < optExpensesItem.length; j++) {
         let c = optExpensesItem[j].value;
         appData.optionalExpenses[j] = c;
