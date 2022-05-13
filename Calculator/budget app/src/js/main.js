@@ -49,13 +49,6 @@ startBtn.addEventListener('click', function () {
     dayValue.value = new Date(Date.parse(time)).getDate();
 });
 
-// for(let i = 0; i < expensesItem.length; i++){
-//     expensesItem[i].addEventListener('input', function () {
-//         expensesBtn.disabled = false;
-//         calcBtn.disabled = false;
-//     });
-// }
-
 expensesItem.forEach(function (val, key) {
     val.addEventListener('input', function () {
         let isUndefined = true;
