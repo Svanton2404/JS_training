@@ -36,11 +36,11 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // Timer
 
-    let deadline = '2022-05-16';
+    let deadline = '2022-05-25';
 
     function getTimeRemaining(endtime) {
         let t = Date.parse(endtime) - Date.parse(new Date());
-                
+
         if (t <= 0) {
             let seconds = 0 + '0',
                 minutes = 0 + '0',
@@ -56,23 +56,23 @@ window.addEventListener('DOMContentLoaded', function () {
                 minutes = Math.floor((t / 1000 / 60) % 60),
                 hours = Math.floor((t / (1000 * 60 * 60)));
 
-                if(seconds < 10){
-                    seconds = '0' + seconds;
-                };
-                if(minutes < 10){
-                    minutes = '0' + minutes;
-                };
-                if(hours < 10){
-                    hours = '0' + hours;
-                };
+            if (seconds < 10) {
+                seconds = '0' + seconds;
+            };
+            if (minutes < 10) {
+                minutes = '0' + minutes;
+            };
+            if (hours < 10) {
+                hours = '0' + hours;
+            };
             return {
                 'total': t,
                 'hours': hours,
                 'minutes': minutes,
                 'seconds': seconds
-            }
-        }
-    }
+            };
+        };
+    };
 
     function setClock(id, endtime) {
         let timer = document.getElementById(id),
@@ -94,4 +94,32 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     }
     setClock('timer', deadline);
+
+    // Model
+
+    let more = document.querySelector('.more'),
+        overlay = document.querySelector('.overlay'),
+        close = document.querySelector('.popup-close'),
+        btnDiscr = document.querySelectorAll('.description-btn');
+        
+
+    more.addEventListener('click', function () {
+        overlay.style.display = 'block';
+        this.classList.add('more-splash');
+        document.body.style.overflow = 'hidden';
+    });
+
+    close.addEventListener('click', function () {
+        overlay.style.display = 'none';
+        more.classList.remove('more-splash');
+        document.body.style.overflow = '';
+    });
+
+    for (let i = 0; i < btnDiscr.length; i++){
+        btnDiscr[i].addEventListener('click', function(){
+            overlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+    }
+    
 });
