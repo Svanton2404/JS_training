@@ -11,7 +11,7 @@ class Options {
     createDiv() {
         let div = document.createElement('div');
         div.innerHTML = prompt('Введите любой текст');
-        div.style.cssText = 'background-color: this.bg; font-size: this.fontSize; text-align: this.textAlign;';
+        div.style.cssText = `height: ${this.height}; width: ${this.width}; background-color: ${this.bg}; font-size: ${this.fontSize}; text-align: ${this.textAlign};`;
         document.body.append(div);
         
     } 
@@ -19,4 +19,6 @@ class Options {
 
 let block = new Options(40, 100,'yellow','30px','center');
 
-console.log(block.createDiv());
+block.createDiv();
+
+console.log(block);
